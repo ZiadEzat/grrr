@@ -1,4 +1,3 @@
 discord.py
 loguru
-sqlite3
 Flask

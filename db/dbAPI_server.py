@@ -47,4 +47,4 @@ def accept():
     
 
 if __name__ == "__main__":
-    app.run(host='IP', port=2048)
+    app.run(host='0.0.0.0', port=2048)
