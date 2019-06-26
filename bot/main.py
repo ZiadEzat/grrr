@@ -90,7 +90,6 @@ class Maintence(commands.Cog):
         await bot.logout()
 
     @commands.command(hidden=True)
-    @checks.is_admin()
     async def reload(self, ctx,  cog = None):
         if cog is None:
             await ctx.send("Please specify a cog")
