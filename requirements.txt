@@ -3,3 +3,11 @@ loguru
 Flask
 tensorflow
 GitPython
+tensorflow_hub
+matplotlib
+pandas
+seaborn
+
+profanity-check
+profanity-filter
+perspective

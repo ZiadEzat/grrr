@@ -7,7 +7,7 @@ app = Flask(__name__)
 Akey = 'TEST:TESTKEYID12:SUPERSECRETSTRING'
 
 global db
-db = dbw.database('DATABASE_NAME')
+db = dbw.database('database.db')
 
 @app.route('/api/', methods=['POST','GET'])
 def accept():
@@ -20,7 +20,7 @@ def accept():
                 coefs = db.get_coefs(request.args.get(str(channel)))
                 return jsonify({'settings':sett,'coefs':coefs})
             except Exception:
-                return('500')
+                return '500'
         elif a_type == 'post':
             try:
                 if db.get_settings(str(channel)):

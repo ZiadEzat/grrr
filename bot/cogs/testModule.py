@@ -7,6 +7,10 @@ import git
 
 
 
+
+
+
+
 class CommonSpam(commands.Cog):
     """
     Fights against common spam that can plague discord servers
@@ -22,6 +26,16 @@ class CommonSpam(commands.Cog):
                                    '\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])', message.content))
         return count
 
+    async def run_message_through_nn(self, message):
+        """
+
+        :param message:
+        :return:
+        """
+        p
+        return predict_prob([f'{message}'])
+        pass
+
     @commands.Cog.listener()
     async def on_message(self, message):
         number_of_emojis = await self.countEmojis(message)
@@ -29,6 +43,15 @@ class CommonSpam(commands.Cog):
             await message.delete()
             channel = await message.author.create_dm()
             await channel.send("Please do not spam")
+        nn_results = await self.run_message_through_nn(message=message.content)
+        logger.info(f'{message.content}: probability of profanity {float(nn_results[0])}')
+
+        if float(nn_results[0]) > 0.65:
+            await message.delete()
+            channel = await message.author.create_dm()
+            await channel.send("watch your language please")
+
+
 
     @commands.command()
     @checks.is_admin()
