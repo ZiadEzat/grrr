@@ -43,7 +43,7 @@ def accept():
                         return '500'
             except Exception:
                 return '500'
-            
+    return '500'        
     
 
 if __name__ == "__main__":
