@@ -2,9 +2,11 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 import db_worker as dbw
+import config_load as cl
+
 app = Flask(__name__)
 
-Akey = 'TEST:TESTKEYID12:SUPERSECRETSTRING'
+Akey = cl.config_load()['key']
 
 global db
 db = dbw.database('database.db')
