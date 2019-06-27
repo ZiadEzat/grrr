@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 class Predictor():
     def __init__(self):
         self.payload = {'key': ''}
@@ -12,9 +13,17 @@ class Predictor():
             raise Exception("Invalid Language for toxicity report")
         data = {'comment': {'text': comment},
                      'languages': [language],
-                     'requestedAttributes': {'TOXICITY': {}}}
+                     'requestedAttributes': {'SEVERE_TOXICITY': {}}}
         return self._send_request(data)
 
+    def get_incoherent(self, comment, language='en'):
+        languages = ['en']
+        if language not in languages:
+            raise Exception("Invalid Language for incoherence report")
+        data = {'comment': {'text': comment},
+                    'languages': [language],
+                    'requestedAttributes': {'INCOHERENT': {}}}
+        return self._send_request(data)
 
     def _send_request(self, data):
         r = requests.post("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze",
