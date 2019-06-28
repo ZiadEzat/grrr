@@ -8,7 +8,7 @@ import asyncio
 from pathlib import Path
 from cogs.utils import checks # This will say error in most IDSs, Ignore it
 
-
+import traceback
 
 # initiate logger
 logger.add(f"file_{str(time.strftime('%Y%m%d-%H%M%S'))}.log",
@@ -58,6 +58,7 @@ class Bot(commands.Bot):
                 logger.success(f'loaded {extension}')
             except Exception as e:
                 error = f'{extension}\n {type(e).__name__} : {e}'
+                print(''.join(traceback.format_exception(etype=type(e), value=e, tb=e.__traceback__)))
                 logger.error(f'failed to load extension {error}')
 
         try:
