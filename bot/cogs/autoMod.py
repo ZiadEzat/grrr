@@ -16,7 +16,7 @@ class autoMod(commands.Cog):
 		self.payload = {'key': bot.config['perspective_key']}
 		
 		self.headers = {'Content-Type': 'application/json'}
-		self.treshold = 0.9
+		self.treshold = 0.85
 		self.numberOfFiltersAboveTresholdToFilter = 2
 		self.debug = False
 	
