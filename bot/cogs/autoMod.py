@@ -18,7 +18,8 @@ class AutoMod(commands.Cog):
         self.headers = {'Content-Type': 'application/json'}
         self.treshold = 0.9
         self.numberOfFiltersAboveTresholdToFilter = 2
-        self.debug = True
+        self.emojiThreshhold = 3
+        self.debug = False
     
     async def countEmojis(self, message: discord.Message):
         count = len(re.findall("(\:[a-z_1-9A-Z]+\:)", message.content))  # custom emojis
@@ -35,6 +36,12 @@ class AutoMod(commands.Cog):
         s = await self.getSettings(message.guild.id)
         if not s['enabled'] or message.author.bot:
             return
+        if await self.countEmojis(message) > self.emojiThreshhold:
+            await message.delete()
+            if s['channel']:
+                embed = await self.create_log(message, ['Emoji Spam'])
+                return await self.bot.get_channel(s['channel']).send(embed=embed)
+
         
         response = self.get_toxicity(message.content)
         response = response['attributeScores']
@@ -46,9 +53,10 @@ class AutoMod(commands.Cog):
             await message.channel.send(msg.title())
         if len(scores) >= self.numberOfFiltersAboveTresholdToFilter:
             await message.delete()
-            embed = await self.create_log(message, scores)
+
             # TODO: Send log messages to log channel specified on emable if none specified send no logs
             if s['channel']:
+                embed = await self.create_log(message, scores)
                 return await self.bot.get_channel(s['channel']).send(embed=embed)
 
 
