@@ -11,6 +11,9 @@ from cogs.utils import checks # This will say error in most IDSs, Ignore it
 import traceback
 
 # initiate logger
+
+
+
 logger.add(f"file_{str(time.strftime('%Y%m%d-%H%M%S'))}.log",
            rotation="1 day",
            enqueue=True,
@@ -42,6 +45,7 @@ class Bot(commands.Bot):
         self.start_time = None
         self.app_info = None
         self.loop.create_task(self.load_all_extensions())
+        self.config = config_load()
 
 
     async def get_prefix_(self, bot, message):
