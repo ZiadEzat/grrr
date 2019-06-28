@@ -1,26 +1,22 @@
 from discord.ext import commands
-from discord.ext.commands import bot
 import discord
-import asyncio
-import timeago
-import datetime
-# import utils.cog
-#on_guild_join recrawl
 from .utils.db import *
+from .utils import checks
 
 
 class EnableDiable(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.group()
+    @checks.is_admin()
     async def disable(self, ctx):
         if ctx.invoked_subcommand is None:
             embed = discord.Embed(title="Invalid disable command passed...", color=discord.Color.red())
             await ctx.send(embed=embed)
 
     @commands.group()
+    @checks.is_admin()
     async def enable(self ,ctx):
         if ctx.invoked_subcommand is None:
             embed = discord.Embed(title="Invalid enabled command passed...", color=discord.Color.red())
