@@ -15,7 +15,7 @@ def Enabled():
 
 
 class reactionRoles(commands.Cog):
-	
+	"""Easy to set up reaction roles feature"""
 	def __init__(self,bot):
 		self.bot = bot
 	
@@ -35,18 +35,17 @@ class reactionRoles(commands.Cog):
 		d = await db['reactionRoles'].find_one({'server_id':gid,'channel_id':cid,'message_id':mid})
 		return d
 
-	@commands.command()
-	async def enableRR(self,ctx):
-		await updateSettings(ctx.guild.id,{"reactionRoles":{"enabled":True}})
-		await ctx.send("Done")
-	
-
 
 	async def getSettings(self,server_id):
 		return await getSettings(server_id,cog="reactionRoles")
 
 	@commands.command()
 	async def postRRMessage(self,ctx,category:str,exclusive:bool=False,*emojis):
+		"""Post a message users can react to in order to get a role, syntax: !postRRMessage <category_name> <optional:is_exclusive> <optional:custom_emojis> """
+		
+		s = await ctx.cog.getSettings(ctx.guild.id)
+		if s['enabled'] == True:
+			return True
 
 		d = {}
 		d['emojis'] = emojis
@@ -65,25 +64,6 @@ class reactionRoles(commands.Cog):
 		
 		await self.updateRR(ctx.guild.id,message.channel.id,message.id,d)
 
-	@commands.is_owner()
-	@commands.command()
-	async def rrClean(self,ctx):
-		guild = ctx.guild
-		cursor = self.db['reactionRoles'].find()
-		ds = await cursor.to_list(length=None)		
-		for d in ds:
-			channel = guild.get_channel(d['channel_id'])
-			message = None
-			try:
-				message = await channel.fetch_message(d['message_id'])
-			except Exception as e:
-				if isinstance(e,discord.ext.commands.errors.CommandInvokeError):
-					pass
-				else:
-					print(e)
-			if message == None or channel == None:
-				await ctx.send(str(d))
-				await self.db['reactionRoles'].delete_one({'_id':d['_id']})
 
 	@commands.Cog.listener()
 	async def on_raw_reaction_add(self,payload):
@@ -107,10 +87,12 @@ class reactionRoles(commands.Cog):
 
 		d = await self.getRR(g.id,c.id,m.id)
 
+
+
 		if d == None:
 			return
 
-	
+
 		rid = d['reactions'].get(emoji,None)
 
 		
