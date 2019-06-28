@@ -31,12 +31,6 @@ class joinLog(commands.Cog):
 			except discord.errors.Forbidden:
 				pass
 
-	@commands.command()
-	async def ts(self,ctx):
-		await updateSettings(ctx.guild.id,{"joinLog":{"enabled":True,"join_log_channel_id":ctx.channel.id}})
-		embed = discord.Embed(title="Done! :white_check_mark:")
-		await ctx.send(embed=embed)
-
 
 	async def find_possible_invites(self,guild):
 		i = 1
