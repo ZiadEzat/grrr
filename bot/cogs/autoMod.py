@@ -80,15 +80,14 @@ class AutoMod(commands.Cog):
         response = self._send_request(data)
         return response
 
-
-def _send_request(self, data):
-    r = requests.post("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze",
-                      params=self.payload,
-                      headers=self.headers,
-                      json=data)
-    if r.status_code != 200:
-        raise Exception("Error Making Your Request")
-    return json.loads(r.text)
+    def _send_request(self, data):
+        r = requests.post("https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze",
+                          params=self.payload,
+                          headers=self.headers,
+                          json=data)
+        if r.status_code != 200:
+            raise Exception("Error Making Your Request")
+        return json.loads(r.text)
 
 
 
