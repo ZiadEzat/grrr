@@ -44,7 +44,7 @@ class autoMod(commands.Cog):
 			return
 
 		thing = message.content
-		thing = str(thing).replace('_', ' ').
+		thing = str(thing).replace('_', ' ')
 		response = self.get_toxicity(thing)
 		response = response['attributeScores']
 		msg = "String: " + message.content + "\n"
