@@ -40,7 +40,9 @@ class autoMod(commands.Cog):
 		if not s['enabled'] or message.author.bot:
 			return
 
-		response = self.get_toxicity(message.content)
+		thing = message.content
+		thing = str(thing).replace('_', ' ')
+		response = self.get_toxicity(thing)
 		response = response['attributeScores']
 		msg = "String: " + message.content + "\n"
 		scores = [ k for k,v in response.items()  if v['summaryScore']['value'] >= self.treshold ]
