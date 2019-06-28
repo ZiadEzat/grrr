@@ -1,7 +1,6 @@
-from db import *
 import asyncio
 
-
+from bot.cogs.utils.db import updateCogSettings, getSettings
 
 
 async def test_db():
