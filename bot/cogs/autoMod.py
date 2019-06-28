@@ -9,7 +9,7 @@ import json
 import re
 
 
-class autoMod(commands.Cog):
+class AutoMod(commands.Cog):
     
     def __init__(self,bot):
         self.bot = bot
