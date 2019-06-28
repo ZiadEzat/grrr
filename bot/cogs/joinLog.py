@@ -35,7 +35,7 @@ class joinLog(commands.Cog):
 
 	@commands.command()
 	async def ts(self,ctx):
-		await updateSettings(ctx.guild.id,{"joinLog":{"enabled":True,"join_log_channel_id":592370373786599465}})
+		await updateSettings(ctx.guild.id,{"joinLog":{"enabled":True,"join_log_channel_id":ctx.channel.id}})
 		await ctx.send("Done")
 
 
