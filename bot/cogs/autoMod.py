@@ -35,7 +35,7 @@ class autoMod(commands.Cog):
 	
 
 	@commands.Cog.listener()
-	async def on_message(self, message):
+	async def gilbert_message(self, message):
 		if 'gilbert' in message.content:
 			await message.channel.send("gilbert is a stupid fucking name \n that is all")
 
