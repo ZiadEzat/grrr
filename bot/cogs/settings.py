@@ -27,14 +27,14 @@ class EnableDiable(commands.Cog):
             await ctx.send(embed=embed)
 
     @enable.group()
-    async def joinlog(self, ctx):
-        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": True, "join_log_channel_id": ctx.channel.id}})
+    async def joinlog(self, ctx, channel: discord.TextChannel):
+        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": True, "join_log_channel_id": channel.id}})
         embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been enabled!", color=discord.Color.green())
         await ctx.send(embed=embed)
 
     @disable.group()
     async def joinlog(self, ctx):
-        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": False, "join_log_channel_id": None}})
+        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": False}})
         embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been disabled!", color=discord.Color.green())
         await ctx.send(embed=embed)
 
