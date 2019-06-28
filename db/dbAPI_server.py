@@ -14,6 +14,8 @@ def accept(server_id):
         if request.method == 'GET':
             try:
                 settings = (getSettings(server_id))
+                if settings is None:
+                    return jsonify({"error": "No server with that ID was found"}), 404
                 del settings['_id']
                 return jsonify(settings), 200
             except Exception as e:
