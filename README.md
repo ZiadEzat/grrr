@@ -1,7 +1,7 @@
 ![RAM](https://imgur.com/KB18eCZ.png)
 # Rage Against the Machine (RAM)
 Discord Hack Week  Moderation Bot by Grrrrrrrr team
-####Contributers:
+#### Contributers:
 
 - J_C___#8947
 - Marto#0874
