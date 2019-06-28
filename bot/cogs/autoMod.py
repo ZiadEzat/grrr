@@ -1,4 +1,4 @@
-
+import datetime
 import json
 import re
 
@@ -28,7 +28,7 @@ class AutoMod(commands.Cog):
         return count
     
     async def getSettings(self,server_id):
-        return await getSettings(server_id,cog="autoMod")
+        return await getSettings(server_id, cog="AutoMod")
     
     @commands.Cog.listener()
     async def on_message(self,message):
@@ -37,28 +37,33 @@ class AutoMod(commands.Cog):
             return
         
         response = self.get_toxicity(message.content)
-        response = response['attributeScores'.title()]
+        response = response['attributeScores']
         msg = "String: " + message.content + "\n"
         scores = [ k for k,v in response.items()  if v['summaryScore']['value'] >= self.treshold ]
         if self.debug:
             for k,v in response.items():
                 msg += f"{k} = {v['summaryScore']['value']} \n"
-            await message.channel.send(msg)
+            await message.channel.send(msg.title())
         if len(scores) >= self.numberOfFiltersAboveTresholdToFilter:
-            # print(scores)
             await message.delete()
             embed = await self.create_log(message, scores)
             # TODO: Send log messages to log channel specified on emable if none specified send no logs
-            await message.channel.send(embed=embed)
-            return
-    
+            if s['channel']:
+                return await self.bot.get_channel(s['channel']).send(embed=embed)
+
 
     async def create_log(self, message, reasons):
-        embed = discord.Embed(title=f"Message removed in {message.channel.name}")
+        guild = await self.bot.fetch_guild(message.guild.id)
+        tz = await self.get_timezone(guild.region)
+        embed = discord.Embed(title=f"Message removed in #{message.channel.name}",
+                              description=str(datetime.datetime.utcnow()) + " UTC")
         embed.add_field(name=f"Message:", value=f"{message.content}")
         embed.add_field(name=f"Author:", value=f"{message.author.name}")
+        reason_string = ""
+
         for reason in reasons:
-            embed.add_field(name=f"Reason:", value=f"{reason}")
+            reason_string += reason + "\n"
+        embed.add_field(name=f"Reason:", value=f"{reason_string.title()}")
         return embed
     
     
@@ -89,6 +94,31 @@ class AutoMod(commands.Cog):
             raise Exception("Error Making Your Request")
         return json.loads(r.text)
 
+    async def get_timezone(self, region):
+        regions = {'amsterdam': 0,
+                   'frankfurt': '',
+                   'hongkong': '',
+                   'india': '',
+                   'japan': '',
+                   'london': '',
+                   'russia': '',
+                   'singapore': '',
+                   'southafrica': '',
+                   'brazil': '',
+                   'eu_central': '',
+                   'eu_west': '',
+                   'sydney': '',
+                   'us_central': '',
+                   'us_east': '',
+                   'us_south': '',
+                   'us_west': '',
+                   'vip_amsterdam': '',
+                   'vip_us_east': '',
+                   'vip_us_west': ''}
+        if region not in regions:
+            return False
+        return regions[region]
+        pass
 
 
 def setup(bot):
