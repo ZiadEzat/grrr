@@ -42,6 +42,10 @@ class reactionRoles(commands.Cog):
 	@commands.command()
 	async def postRRMessage(self,ctx,category:str,exclusive:bool=False,*emojis):
 		"""Post a message users can react to in order to get a role, syntax: !postRRMessage <category_name> <optional:is_exclusive> <optional:custom_emojis> """
+		
+		s = await ctx.cog.getSettings(ctx.guild.id)
+		if s['enabled'] == True:
+			return True
 
 		d = {}
 		d['emojis'] = emojis
@@ -83,10 +87,12 @@ class reactionRoles(commands.Cog):
 
 		d = await self.getRR(g.id,c.id,m.id)
 
+
+
 		if d == None:
 			return
 
-	
+
 		rid = d['reactions'].get(emoji,None)
 
 		
