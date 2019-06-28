@@ -45,7 +45,6 @@ class reactionRoles(commands.Cog):
 	async def getSettings(self,server_id):
 		return await getSettings(server_id,cog="reactionRoles")
 
-	@commands.is_owner()
 	@commands.command()
 	async def postRRMessage(self,ctx,category:str,exclusive:bool=False,*emojis):
 
