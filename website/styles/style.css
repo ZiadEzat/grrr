@@ -15,26 +15,33 @@ html {
 }
 .box2 {
     background: #2b2f33;
-    width: 335px;
+    width: 25%;
     height: 50px;
     color: white;
     font-weight: bold;
-    padding: 15px;
-    padding-left: 150px;
+     padding-top: 1%;
     float: left;
     border-left: 2px #23272a solid;
+}
+
+.box2 p {
+  text-align: center;
+  font-size: 16px;
 }
 
 .dropdown {
     background-color: #e28800;
     color: white;
-    padding: 16px;
-    font-size: 16px;
     border: none;
     cursor: pointer;
-    width: 338px;
-}
+    width: 25%;
+    font-size: 16px;
+    text-align: center;
+  padding-top: 2px;
 
+}
+.dropdown p {
+}
 .dropdown:hover, .dropdown:focus {
     background-color: #e2b100;
   }
