@@ -2,10 +2,16 @@ import requests
 import json
 
 
+
 class Predictor():
     def __init__(self):
-        self.payload = {'key': ''}
+        self.config = self.config_load()
+        self.payload = {'key': self.config['perspective_key']}
         self.headers = {'Content-Type': 'application/json'}
+
+    def config_load(self):
+        with open('../../data/config.json', 'r', encoding='utf-8') as doc:
+            return json.load(doc)
 
     def get_toxicity(self, comment, language='en'):
         languages = ['en', 'fr', 'es']
