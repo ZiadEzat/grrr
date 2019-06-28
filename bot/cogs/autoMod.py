@@ -32,12 +32,12 @@ class autoMod(commands.Cog):
 	
 
 	@commands.Cog.listener()
-	async def on_message(self,message,ctx):
+	async def on_message(self, message, ctx):
 		if 'gilbert' in message.content:
-			await ctx.send("gilbert is a stupid fucking name \n that is all")
+			await message.channel.send("gilbert is a stupid fucking name \n that is all")
 
 	@commands.Cog.listener()
-	async def on_message(self,message):
+	async def on_message(self, message):
 		s = await self.getSettings(message.guild.id)
 
 		if not s['enabled'] or message.author.bot:
