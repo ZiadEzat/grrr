@@ -23,13 +23,12 @@ async def getSettings(server_id,cog=None):
 
 async def updateCogSettings(server_id,cog_name,new_settings):
 
-	await db['settings'].update_one({'server_id':server_id}, {'$set': { cog_name : new_settings}},upsert=True)
+    await db['settings'].update_one({'server_id':server_id}, {'$set': { cog_name : new_settings}},upsert=True)
     
-
 
 async def updateSettings(server_id,new_settings):
 
-	await db['settings'].update_one({'server_id':server_id}, {'$set': new_settings},upsert=True)
+    await db['settings'].update_one({'server_id':server_id}, {'$set': new_settings},upsert=True)
 
 
 
