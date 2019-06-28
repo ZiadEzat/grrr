@@ -27,12 +27,12 @@ async def updateSettings(server_id, new_settings):
 
 app = Flask(__name__)
 
-Akey = cl.config_load()['key']
+API_KEY = cl.config_load()['key']
 
 
 @app.route('/api/<int:server_id>', methods=['POST', 'GET'])
 def accept(server_id):
-    if request.args.get("key") == Akey:
+    if request.args.get("key") == API_KEY:
         if request.method == 'GET':
             try:
                 settings = dict(getSettings(server_id))
