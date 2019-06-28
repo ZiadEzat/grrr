@@ -28,7 +28,10 @@ That's out discord server, where you can get any kind of help with your bot or j
 A discord bot that will keep communities a safe environment by censoring insults and spam through the use of neural networks. This bot will scan all messages sent within a server (minus the excluded channels ie: mod talk) and run their contents through a few neural networks that are trained on spam copy pastas and troll messages.
 
 ## How to use:
-!enable autoMod: Allows bot to delete messages flagged by perspective api
+!help: Shows all available modules, use !help module_name to learn how to use each module
+!enable autoMod: Automatically filter (some) inapropiate chat messages leveraging the power of AI
+!joinLog: Get useful intel on who joins your guild, including invite link used and account's age
+!reactionRoles: The popular feature, made easy
 
 
 ### Hosting your own instance of RAM
