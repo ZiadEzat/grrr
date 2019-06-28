@@ -1,12 +1,12 @@
 
-from discord.ext import commands
-from discord.ext.commands import bot
-import discord
-from .utils.db import *
-
-import requests
 import json
 import re
+
+import discord
+import requests
+from discord.ext import commands
+
+from .utils.db import *
 
 
 class AutoMod(commands.Cog):
@@ -93,4 +93,4 @@ def _send_request(self, data):
 
 
 def setup(bot):
-    bot.add_cog(autoMod(bot))
+    bot.add_cog(AutoMod(bot))
