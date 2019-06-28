@@ -47,7 +47,7 @@ class autoMod(commands.Cog):
 		if self.debug:
 			for k,v in response.items():
 				msg += f"{k} = {v['summaryScore']['value']} \n"
-			await message.channel.send(msg.title())
+			await message.channel.send(msg.title().replace('_', ' '))
 		if len(scores) >= self.numberOfFiltersAboveTresholdToFilter:
 			await message.delete()
 			embed = await self.create_log(message, scores)
@@ -68,7 +68,7 @@ class autoMod(commands.Cog):
 
 		for reason in reasons:
 			reason_string += reason + "\n"
-		embed.add_field(name=f"Reason:", value=f"{reason_string.title()}")
+		embed.add_field(name=f"Reason:", value=f"{reason_string.title().replace('_',' ')}")
 		return embed
 	
 	
