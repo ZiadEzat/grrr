@@ -18,7 +18,9 @@ Discord Hack Week  Moderation Bot by Grrrrrrrr team
 ![Dicrors bot](https://cdn.discordapp.com/attachments/591700394820763682/594232336132866050/Screen_Shot_2019-06-28_at_2.26.00_PM.png)
 - Server Level Settings: This bot was built to be hosted by one individual and spread across the discord mulit-verse using invite links. Each server can enable and disable commands and features using **!enable [command]** or **!disable [command]** as we will show more of later.
 
-
+## Our Discord server
+That's out discord server, where you can get any kind of help with your bot or just test it
+(https://discord.gg/bwva9ut)
 
 
 
