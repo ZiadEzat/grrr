@@ -3,6 +3,7 @@ import discord
 import re
 from loguru import logger
 from .utils import checks # This will say error in most IDSs, Ignore it
+from .utils.commentAnalyzer import Predictor
 import git
 
 
@@ -32,24 +33,46 @@ class CommonSpam(commands.Cog):
         :param message:
         :return:
         """
-        p
-        return predict_prob([f'{message}'])
+
+        # return predict_prob([f'{message}'])
+        pred = Predictor()
+        return pred.get_toxicity(self, message)
         pass
 
+    # @commands.Cog.listener()
+    # async def on_message(self, message):
+    #     number_of_emojis = await self.countEmojis(message)
+    #     if number_of_emojis >= 3:
+    #         await message.delete()
+    #         channel = await message.author.create_dm()
+    #         await channel.send("Please do not spam")
+    #     nn_results = await self.run_message_through_nn(message=message.content)
+    #     logger.info(f'{message.content}: probability of profanity {float(nn_results[0])}')
+    #
+    #     if float(nn_results[0]) > 0.65:
+    #         await message.delete()
+    #         channel = await message.author.create_dm()
+    #         await channel.send("watch your language please")
     @commands.Cog.listener()
     async def on_message(self, message):
-        number_of_emojis = await self.countEmojis(message)
-        if number_of_emojis >= 3:
-            await message.delete()
-            channel = await message.author.create_dm()
-            await channel.send("Please do not spam")
-        nn_results = await self.run_message_through_nn(message=message.content)
-        logger.info(f'{message.content}: probability of profanity {float(nn_results[0])}')
 
-        if float(nn_results[0]) > 0.65:
-            await message.delete()
-            channel = await message.author.create_dm()
-            await channel.send("watch your language please")
+        if message.guild.id == 588176999215005696 and not message.author.bot:
+            # t = self.predictor.get_toxicity(message.content)
+            pred = Predictor()
+            t = pred.get_toxicity(message.content)
+            d = t['attributeScores']
+
+            msg = ""
+
+            for k, v in d.items():
+                print(v)
+                msg += f"{k} = {v['summaryScore']['value']} \n"
+
+            # toxicity = t['attributeScores']['TOXICITY']['summaryScore']['value']
+            # severe_toxicity = t['attributeScores']['SEVERE_TOXICITY']['summaryScore']['value']
+            # ltr = t['attributeScores']['LIKELY_TO_REJECT']['summaryScore']['value']
+            # spam = t['attributeScores']['SPAM']['summaryScore']['value']
+            await message.channel.send(msg)
 
 
 
@@ -66,6 +89,7 @@ class CommonSpam(commands.Cog):
             await ctx.send("Please specify a setting! (on | off)")
         else:
             if setting.lower() == "on" or setting.lower() == "off":
+                await ctx.send("Setting is now on")
                 pass
             else:
                 await ctx.send("Please specify a *correct* setting! (on | off)")
