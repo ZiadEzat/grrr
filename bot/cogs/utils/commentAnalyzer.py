@@ -3,7 +3,7 @@ import json
 
 
 class Predictor():
-    def init(self):
+    def __init__(self):
         self.payload = {'key': ''}
         self.headers = {'Content-Type': 'application/json'}
 
