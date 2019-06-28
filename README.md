@@ -1,9 +1,13 @@
-# grrr
+# Rage Against the Machine (RAM)
 Discord Hack week bot by Grrrrrrrr team 
 
 ## Features
 
-- Join Log: when a new user joins it will tell the mods that they are 
+- Join Log: When a new user joins the server it will tell the mods about that user
+![Alt text](https://i.imgur.com/D7fKe8o.png "Join Logs")
+- Reaction Roles: Users can add custom roles to themselves with this highly customizable, easily configurable module.
+- AutoModerator: This is the largest and most exciting feature of RAM. This module acts as a much more robust version of Discord's Explicit Content Feature. Passing all your messages through [Google's Perspective API](https://www.perspectiveapi.com/#/home) RAM can determine if what users are saying is insulting or demeaning to others! We designed this feature to take the pressure off of a lot of moderators shoulders so they can stop worrying so much about message sensoring.
+ 
 
 
 ## Project Description
