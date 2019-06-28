@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="slick/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="js/JS.js"></script>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style2.css">
+
+    <script type="text/javascript" src="js/jquery-331.min.js"></script>
+    <script type="text/javascript" src="slick/slick/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <title>RaidAM</title>
+
+</head>
+<body>
+
+        <script>
+                window.onload = () => {
+                    const fragment = new URLSearchParams(window.location.hash.slice(1));
+                    
+                    if (fragment.has("access_token")) {
+                        const accessToken = fragment.get("access_token");
+                        const tokenType = fragment.get("token_type");
+        
+                        fetch('https://discordapp.com/api/users/@me', {
+                            headers: {
+                                authorization: `${tokenType} ${accessToken}`
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(response => {
+                                console.log(response)
+                                const { username, discriminator,servers } = response;
+                                console.log(` ${username}#${discriminator}`)
+                                usernameDOM = document.getElementById('username')
+                                        var newEl = document.createElement('p')
+                                        newEl.innerHTML = '<p>' +` ${username}` + ' <a href = "https://discordapp.com/api/oauth2/authorize?client_id=593054079710920722&redirect_uri=http%3A%2F%2Flocalhost%2FRAM%2Fdashboard.html&response_type=token&scope=identify%20guilds">Not you?</a></p> '
+                                        usernameDOM.appendChild(newEl)
+                            })
+                            .catch(console.error);
+                            fetch('https://discordapp.com/api/users/@me/guilds', {
+                            headers: {
+                                authorization: `${tokenType} ${accessToken}`
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(response => {
+                                console.log(response)
+                                for (i = 0; i < response.length; i++) {
+                                    if (response[i].permissions == "2146959359") {
+                                    console.log(response[i].name)
+                                    var newEl = document.createElement('a')
+                                    newEl.innerHTML = '<a>' + response[i].name +'</a>'
+                                    serverDOM = document.getElementById('myDropdown')
+                                    serverDOM.appendChild(newEl)
+                                }
+                            }
+                                
+                            })
+                            .catch(console.error);
+        
+                    }
+                    else {
+                        usernameDOM = document.getElementById('username')
+                        var newEl = document.createElement('p')
+                        newEl.innerHTML = '<a href = "https://discordapp.com/api/oauth2/authorize?client_id=593054079710920722&redirect_uri=http%3A%2F%2Flocalhost%2FRAM%2Fdashboard.html&response_type=token&scope=identify%20guilds">Login</a> '
+                        usernameDOM.appendChild(newEl)
+                    }
+                }
+            </script>
+        <header>
+                <div class="logo-wrapper">
+                    <a href="index.html">
+                        <img src="elements/group 2.svg" class="logo">
+                    </a>
+                </div>
+            
+                <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button  type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar" aria-expanded="false"
+                        >
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+            
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="nav navbar-nav">
+                            <li class="">
+                                <a href="./index.html">Home</a>
+                            </li>
+                            <li class="">
+                                <a href="dashboard.html">Dashboard</a>
+                            </li>
+                            
+                            </li>
+
+                            <li class="">
+                                <a href="#features">Features</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav></header>
+        <div class="dashboard" >
+        <div class="box2" id="username"></div>
+        <div class="box2"><p>Commands</p></div>
+        <div class="box2"><p>Status</p></div>
+        <button onclick="dropdown()" class="box2 dropdown">Servers
+                <div id="myDropdown" class="dropdown-content">
+
+                      </div>
+        </button>
+
+            <div class="box"><h1>Hello World</h1>
+                <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h2>
+   
+                </div>
+                <div class="box"><h1>Hello World</h1>
+                    <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                          </label>
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h2>
+       
+                    </div>            <div class="box"><h1>Hello World</h1>
+                <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h2>
+   
+                </div>
+                <div class="box"><h1>Hello World</h1>
+
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h2>
+       
+                    </div>
+
+        </div>
+        </body>
+ 
