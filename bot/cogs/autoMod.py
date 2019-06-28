@@ -19,20 +19,23 @@ class autoMod(commands.Cog):
 		self.treshold = 0.85
 		self.numberOfFiltersAboveTresholdToFilter = 2
 		self.debug = False
-	
+
+	@commands.Cog.listener()
 	async def countEmojis(self, message: discord.Message):
 		count = len(re.findall("(\:[a-z_1-9A-Z]+\:)", message.content))  # custom emojis
 		if count == 0:  # Test for Unicode Emojis
 			count = len(re.findall('(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|'
 								   '\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])', message.content))
-		return count
+		if count >= 3:
+			await message.delete()
+			await message.channel.send("please do not spam emojis")
 	
 	async def getSettings(self,server_id):
 		return await getSettings(server_id, cog="autoMod")
 	
 
 	@commands.Cog.listener()
-	async def on_message(self, message, ctx):
+	async def on_message(self, message):
 		if 'gilbert' in message.content:
 			await message.channel.send("gilbert is a stupid fucking name \n that is all")
 
