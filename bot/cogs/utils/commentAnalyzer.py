@@ -10,7 +10,7 @@ class Predictor():
         self.headers = {'Content-Type': 'application/json'}
 
     def config_load(self):
-        with open('../../data/config.json', 'r', encoding='utf-8') as doc:
+        with open('./data/config.json', 'r', encoding='utf-8') as doc:
             return json.load(doc)
 
     def get_toxicity(self, comment, language='en'):
