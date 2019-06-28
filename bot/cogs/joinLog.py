@@ -22,21 +22,14 @@ class joinLog(commands.Cog):
 
 	async def crawl_invites(self):
 		for guild in self.bot.guilds:
-			
 			try:
 				guild_invites = {}
 				invites = await guild.invites()
 				for invite in invites:
 					guild_invites[invite.code] = invite
 				self.invites[guild] = guild_invites
-				
 			except discord.errors.Forbidden:
 				pass
-
-	@commands.command()
-	async def ts(self,ctx):
-		await updateSettings(ctx.guild.id,{"joinLog":{"enabled":True,"join_log_channel_id":ctx.channel.id}})
-		await ctx.send("Done")
 
 
 	async def find_possible_invites(self,guild):
@@ -52,7 +45,6 @@ class joinLog(commands.Cog):
 					if invite.uses >= 1:
 						res.append(invite)
 					continue
-
 				new_uses = invite.uses
 				if old_uses < new_uses :
 					self.invites[guild][invite.code] = invite
@@ -63,8 +55,6 @@ class joinLog(commands.Cog):
 				i+=1
 			else:
 				break
-
-
 		return res
 
 	@commands.Cog.listener()
@@ -76,19 +66,13 @@ class joinLog(commands.Cog):
 			possible_invites = await self.find_possible_invites(member.guild)
 			channel = member.guild.get_channel(s['join_log_channel_id'])
 			nothing = "** **"
-
-
-
-
 			e = discord.Embed()
 
 			e.colour = discord.Colour.blue()
 			e.title = "Member Joined!"
 			#e.set_author(name=nothing,icon_url=member.avatar_url)
 			e.add_field(name="Name",value=str(member))
-			
 			e.add_field(name="ID:",value=member.id)
-			
 			if len(possible_invites) == 1:
 				e.add_field(name="Acount created",value=timeago.format(member.created_at, datetime.datetime.now()))
 				e.add_field(name="Invite used",value=possible_invites[0].url,inline=True)
@@ -104,12 +88,6 @@ class joinLog(commands.Cog):
 				e.add_field(name="Invite used could not be detected",value=nothing,inline=False)
 
 			await channel.send(embed=e)
-					
-
-		
-		
-
-
 
 def setup(bot):
 	bot.add_cog(joinLog(bot))
