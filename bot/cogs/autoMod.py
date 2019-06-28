@@ -42,8 +42,8 @@ class AutoMod(commands.Cog):
         scores = [ k for k,v in response.items()  if v['summaryScore']['value'] >= self.treshold ]
         if self.debug:
             for k,v in response.items():
-                msg += f"{k} = {v['summaryScore'.title()]['value']} \n"
-            await message.channel.send(msg)
+                msg += f"{k} = {v['summaryScore']['value']} \n"
+            await message.channel.send(msg.title())
         if len(scores) >= self.numberOfFiltersAboveTresholdToFilter:
             await message.delete()
             embed = await self.create_log(message, scores)
