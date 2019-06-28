@@ -23,8 +23,9 @@ class autoMod(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self,message):
-		s = await getSettings(message.guild.id)
+		s = await self.getSettings(message.guild.id)
 		
+
 		if not s['enabled'] or message.author.bot:
 			return
 	   

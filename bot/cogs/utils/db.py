@@ -7,11 +7,13 @@ db = client.ram
 
 
 async def getSettings(server_id,cog=None):
-    s = await db['settings'].find_one({'server_id':server_id})
-    if cog == None:
-        return s	
 
-    elif s == None:
+    s = await db['settings'].find_one({'server_id':server_id})
+    print(f"s {s} cog {cog}")
+    if cog == None:
+        return s
+
+    if s == None:
         return {'enabled':False}
 
     else:   
