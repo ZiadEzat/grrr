@@ -15,7 +15,7 @@ class EnableDiable(commands.Cog):
         loaded_cogs = self.get_loaded_cogs()
 
         if cog not in loaded_cogs:
-            await cogDoesNotExist(ctx.channel)
+            await self.cogDoesNotExist(ctx.channel)
         
         
         await updateSettings(ctx.guild.id, {cog: {"enabled": False}})
@@ -26,14 +26,14 @@ class EnableDiable(commands.Cog):
        
         loaded_cogs = self.get_loaded_cogs()
         if cog not in loaded_cogs:
-            await cogDoesNotExist(ctx.channel)
+            await self.cogDoesNotExist(ctx.channel)
         
         
         await updateSettings(ctx.guild.id, {cog: {"enabled": True}})
         await ctx.send("done :thumbsup:")     
 
 
-    async def cogDoesNotExist(self,channel):
+    async def cogDoesNotExist(self,channel): #naje tgus oretty plz
         loaded_cogs = self.get_loaded_cogs()
 
         msg = "Invalid module name, valid ones are: \n"
