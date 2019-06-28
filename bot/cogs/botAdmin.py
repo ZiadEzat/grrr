@@ -1,10 +1,6 @@
-from discord.ext import commands
 import discord
-import re
-from loguru import logger
-from .utils import checks # This will say error in most IDSs, Ignore it
-from .utils.commentAnalyzer import Predictor
 import git
+from discord.ext import commands
 
 
 class CommonSpam(commands.Cog):
