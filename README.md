@@ -33,6 +33,11 @@ A discord bot that will keep communities a safe environment by censoring insults
 !joinLog: Get useful intel on who joins your guild, including invite link used and account's age
 !reactionRoles: The popular feature, made easy
 
+Using !enable autoMod and specifying a channel allows the bot to output logs
+![example](https://cdn.discordapp.com/attachments/533514371792633856/594270451933511701/Screen_Shot_2019-06-28_at_2.58.07_PM.png)
+which outputs a log like this
+![log](https://cdn.discordapp.com/attachments/533514371792633856/594271036451848219/Screen_Shot_2019-06-28_at_3.00.37_PM.png)
+
 
 ### Hosting your own instance of RAM
 This bot is very simple to setup for yourself!
