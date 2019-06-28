@@ -63,7 +63,7 @@ class AutoMod(commands.Cog):
 
         for reason in reasons:
             reason_string += reason + "\n"
-        embed.add_field(name=f"Reason:", value=f"{reason_string}")
+        embed.add_field(name=f"Reason:", value=f"{reason_string.title()}")
         return embed
     
     
