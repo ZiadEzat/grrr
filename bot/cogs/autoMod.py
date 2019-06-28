@@ -55,7 +55,7 @@ class AutoMod(commands.Cog):
     async def create_log(self, message, reasons):
         guild = await self.bot.fetch_guild(message.guild.id)
         tz = await self.get_timezone(guild.region)
-        embed = discord.Embed(title=f"Message removed in {message.channel.name}",
+        embed = discord.Embed(title=f"Message removed in #{message.channel.name}",
                               description=str(datetime.datetime.utcnow()) + " UTC")
         embed.add_field(name=f"Message:", value=f"{message.content}")
         embed.add_field(name=f"Author:", value=f"{message.author.name}")
