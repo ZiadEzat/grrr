@@ -31,7 +31,10 @@ class autoMod(commands.Cog):
 		return await getSettings(server_id, cog="autoMod")
 	
 
-	
+	@commands.Cog.listener()
+	async def on_message(self,message,ctx):
+		if 'gilbert' in message.content:
+			await ctx.send("gilbert is a stupid fucking name \n that is all")
 
 	@commands.Cog.listener()
 	async def on_message(self,message):
@@ -41,7 +44,7 @@ class autoMod(commands.Cog):
 			return
 
 		thing = message.content
-		thing = str(thing).replace('_', ' ')
+		thing = str(thing).replace('_', ' ').
 		response = self.get_toxicity(thing)
 		response = response['attributeScores']
 		msg = "String: " + message.content + "\n"
