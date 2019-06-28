@@ -48,9 +48,9 @@ class AutoMod(commands.Cog):
             await message.delete()
             embed = await self.create_log(message, scores)
             # TODO: Send log messages to log channel specified on emable if none specified send no logs
-            await message.channel.send(embed=embed)
-            return
-    
+            if s['channel']:
+                return await self.bot.get_channel(s['channel']).send(embed=embed)
+
 
     async def create_log(self, message, reasons):
         guild = await self.bot.fetch_guild(message.guild.id)
