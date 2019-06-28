@@ -15,6 +15,20 @@ class EnableDiable(commands.Cog):
             embed = discord.Embed(title="Invalid disable command passed...", color=discord.Color.red())
             await ctx.send(embed=embed)
 
+    @disable.group()
+    async def joinlog(self, ctx):
+        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": False}})
+        embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been disabled!",
+                              color=discord.Color.green())
+        await ctx.send(embed=embed)
+
+    @disable.group(aliases=['rr'])
+    async def reactionroles(self, ctx):
+        await updateSettings(ctx.guild.id, {"reactionRoles": {"enabled": False}})
+        embed = discord.Embed(title="Done! :white_check_mark:", description="Reaction Roles module has been disabled!",
+                              color=discord.Color.green())
+        await ctx.send(embed=embed)
+
     @commands.group()
     @checks.is_admin()
     async def enable(self ,ctx):
@@ -22,16 +36,20 @@ class EnableDiable(commands.Cog):
             embed = discord.Embed(title="Invalid enabled command passed...", color=discord.Color.red())
             await ctx.send(embed=embed)
 
-    @enable.group()
-    async def joinlog(self, ctx, channel: discord.TextChannel):
-        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": True, "join_log_channel_id": channel.id}})
-        embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been enabled!", color=discord.Color.green())
+    @enable.group(aliases=['rr'])
+    async def reactionroles(self, ctx):
+        await updateSettings(ctx.guild.id, {"reactionRoles": {"enabled": True}})
+        embed = discord.Embed(title="Done! :white_check_mark:", description="Reaction Roles module has been enabled!",
+                              color=discord.Color.green())
         await ctx.send(embed=embed)
 
-    @disable.group()
-    async def joinlog(self, ctx):
-        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": False}})
-        embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been disabled!", color=discord.Color.green())
+    @enable.group()
+    async def joinlog(self, ctx, channel: discord.TextChannel = None):
+        if channel is None:
+            await ctx.send("```diff\n - Please specify the channel you want to enable this on\n```")
+        await updateSettings(ctx.guild.id, {"joinLog": {"enabled": True, "join_log_channel_id": channel.id}})
+        embed = discord.Embed(title="Done! :white_check_mark:", description="JoinLog module has been enabled!",
+                              color=discord.Color.green())
         await ctx.send(embed=embed)
 
 
