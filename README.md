@@ -15,9 +15,11 @@ Discord Hack Week  Moderation Bot by Grrrrrrrr team
 ![Join Logs](https://i.imgur.com/D7fKe8o.png "Join Logs")
 - Reaction Roles: Users can add custom roles to themselves with this highly customizable, easily configurable module.
 - AutoModerator: This is the largest and most exciting feature of RAM. This module acts as a much more robust version of Discord's Explicit Content Feature. Passing all your messages through [Google's Perspective API](https://www.perspectiveapi.com/#/home) RAM can determine if what users are saying is insulting or demeaning to others! We designed this feature to take the pressure off of a lot of moderators shoulders so they can stop worrying so much about message sensoring.
+![Dicrors bot](https://cdn.discordapp.com/attachments/591700394820763682/594232336132866050/Screen_Shot_2019-06-28_at_2.26.00_PM.png)
 - Server Level Settings: This bot was built to be hosted by one individual and spread across the discord mulit-verse using invite links. Each server can enable and disable commands and features using **!enable [command]** or **!disable [command]** as we will show more of later.
 
- 
+
+
 
 
 ## Project Description
