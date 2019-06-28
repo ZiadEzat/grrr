@@ -1,7 +1,6 @@
 from discord.ext import commands
-import discord
+
 from .utils.db import *
-from .utils import checks
 
 
 class EnableDiable(commands.Cog):
@@ -16,6 +15,7 @@ class EnableDiable(commands.Cog):
 
         if cog not in loaded_cogs:
             await self.cogDoesNotExist(ctx.channel)
+            return
         
         
         await updateSettings(ctx.guild.id, {cog: {"enabled": False}})
@@ -27,6 +27,7 @@ class EnableDiable(commands.Cog):
         loaded_cogs = self.get_loaded_cogs()
         if cog not in loaded_cogs:
             await self.cogDoesNotExist(ctx.channel)
+            return
         
         
         await updateSettings(ctx.guild.id, {cog: {"enabled": True}})
