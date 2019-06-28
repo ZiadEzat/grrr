@@ -56,7 +56,7 @@ class CommonSpam(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
 
-        if message.guild.id == 588176999215005696 and not message.author.bot:
+        if not message.author.bot:
             # t = self.predictor.get_toxicity(message.content)
             pred = Predictor()
             t = pred.get_toxicity(message.content)
