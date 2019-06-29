@@ -42,7 +42,7 @@ $(document).ready(function(){
   });
 
 function gotodiscord() {
-    location.replace("https://discordapp.com/api/oauth2/authorize?client_id=593054079710920722&redirect_uri=http%3A%2F%2Flocalhost%2FRAM%2Fdashboard.html&response_type=token&scope=identify%20guilds")
+    location.replace("https://discordapp.com/api/oauth2/authorize?client_id=525814724567367682&redirect_uri=http%3A%2F%2Flocalhost%2FRAM%2Fdashboard.html&response_type=token&scope=identify%20guilds")
 
 }
 function dropdown() {
