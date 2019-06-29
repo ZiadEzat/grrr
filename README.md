@@ -1,6 +1,18 @@
 ![RAM](https://imgur.com/KB18eCZ.png)
 # Rage Against the Machine (RAM)
-Discord Hack Week  Moderation Bot by Grrrrrrrr team
+Discord Hack Week Moderation Bot by Grrrrrrrr team
+
+## Project Description
+A discord bot that will keep communities a safe environment by censoring insults and spam through the use of neural networks. This bot will scan all messages sent within a server (minus the excluded channels ie: mod talk) and run their contents through a few neural networks that are trained on spam copy pastas and troll messages.
+
+
+## Support
+This is our discord server, where you can get any kind of help with this bot or just test some of its features! 
+
+```
+https://discord.gg/bwva9ut
+```
+
 #### Contributers:
 
 - J_C___#8947
@@ -17,25 +29,16 @@ Discord Hack Week  Moderation Bot by Grrrrrrrr team
 - AutoModerator: This is the largest and most exciting feature of RAM. This module acts as a much more robust version of Discord's Explicit Content Feature. Passing all your messages through [Google's Perspective API](https://www.perspectiveapi.com/#/home) RAM can determine if what users are saying is insulting or demeaning to others! We designed this feature to take the pressure off of a lot of moderators shoulders so they can stop worrying so much about message sensoring.
 ![Dicrors bot](https://cdn.discordapp.com/attachments/591700394820763682/594232336132866050/Screen_Shot_2019-06-28_at_2.26.00_PM.png)
 - Server Level Settings: This bot was built to be hosted by one individual and spread across the discord mulit-verse using invite links. Each server can enable and disable commands and features using **!enable [command]** or **!disable [command]** as we will show more of later.
-
-## Our Discord server
-That's out discord server, where you can get any kind of help with your bot or just test it
-(https://discord.gg/bwva9ut)
-
-
-
-## Project Description
-A discord bot that will keep communities a safe environment by censoring insults and spam through the use of neural networks. This bot will scan all messages sent within a server (minus the excluded channels ie: mod talk) and run their contents through a few neural networks that are trained on spam copy pastas and troll messages.
+- API Using Python's Flask: Using the same database as the bot you can manage your servers settings with out API!
+- Web Dashboard: *Work in Progress* (We almost got this working but unfortunately due to time constraints we could not complete it)
 
 ## How to use:
-!help: Shows all available modules, use !help module_name to learn how to use each module
-!enable autoMod: Automatically filter (some) inapropiate chat messages leveraging the power of AI
-!joinLog: Get useful intel on who joins your guild, including invite link used and account's age
-!reactionRoles: The popular feature, made easy
+- !help: Shows all available modules, use !help [module_name] to learn how to use each module
+- !enable autoMod: Automatically filter inappropriate chat messages leveraging the power of Artificial Intelligence
+- !joinLog: Get useful intel on who joins your guild, including invite link used and account's age
+- !reactionRoles: The popular feature, made easy
 
-Using !enable autoMod and specifying a channel allows the bot to output logs
-![example](https://cdn.discordapp.com/attachments/533514371792633856/594270451933511701/Screen_Shot_2019-06-28_at_2.58.07_PM.png)
-which outputs a log like this
+Using `!enable autoMod #logs`  allows the bot to output logs to the specified channel like this:
 ![log](https://cdn.discordapp.com/attachments/533514371792633856/594271036451848219/Screen_Shot_2019-06-28_at_3.00.37_PM.png)
 
 
@@ -53,4 +56,6 @@ This bot is very simple to setup for yourself!
 
 3. Then if you want to test your mongo setup there is a file named `/bot/cogs/utils/test_db.py` that you can run. You should see **DB TESTS PASSED** if everything worked fine
 
-4. Finally to start the bot portion of the application run the `run_bot.sh` file!
+4. Finally to start the bot portion of the application run the `main.py` file inside the bot folder!
+
+
