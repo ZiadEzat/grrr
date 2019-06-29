@@ -1,52 +1,34 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
-import db_worker as dbw
 import config_load as cl
+from DB import getSettings, updateCogSettings
+from flask import Flask
+from flask import request, jsonify
 
 app = Flask(__name__)
 
-Akey = cl.config_load()['key']
+API_KEY = cl.config_load()['key']
 
-global db
-db = dbw.database('database.db')
 
-@app.route('/api/', methods=['POST','GET'])
-def accept():
-    a_type = request.args.get("type")
-    channel = request.args.get("channel")
-    if request.args.get("akey") == Akey:
-        if a_type == 'get':
+@app.route('/api/<int:server_id>', methods=['POST', 'GET'])
+def accept(server_id):
+    if request.args.get("key") == API_KEY:
+        if request.method == 'GET':
             try:
-                sett = db.get_settings(request.args.get(str(channel)))
-                coefs = db.get_coefs(request.args.get(str(channel)))
-                return jsonify({'settings':sett,'coefs':coefs})
-            except Exception:
-                return '500'
-        elif a_type == 'post':
+                settings = (getSettings(server_id))
+                if settings is None:
+                    return jsonify({"error": "No server with that ID was found"}), 404
+                del settings['_id']
+                return jsonify(settings), 200
+            except Exception as e:
+                return jsonify({'error': e}), 500
+        elif request.method == 'POST':
             try:
-                if db.get_settings(str(channel)):
-                    if request.args.get("sc") == 's':
-                        db.set_settings(channel,{'emoji':request.args.get("emoji"), 'copypasta':request.args.get("copypasta"), 'troll':request.args.get("troll"), 'insult':request.args.get("insult"),'alt':request.args.get("alt")})
-                        return '200'
-                    elif request.args.get("sc") == 'c':
-                        db.set_coefs(channel,{'troll':request.args.get('troll'), 'insult':request.args.get("insult")})
-                        return '200'
-                    else:
-                        return '500'
-                else:
-                    if request.args.get("sc") == 's':
-                        db.create_settings(channel,{'emoji':request.args.get("emoji"), 'copypasta':request.args.get("copypasta"), 'troll':request.args.get("troll"), 'insult':request.args.get("insult"),'alt':request.args.get("alt")})
-                        return '200'
-                    elif request.args.get("sc") == 'c':
-                        db.create_coefs(channel,{'troll':request.args.get('troll'), 'insult':request.args.get("insult")})
-                        return '200'
-                    else:
-                        return '500'
-            except Exception:
-                return '500'
-    else:
-        return '500'        
+                body = request.get_json()
+                updateCogSettings(server_id, body['cog'], body['setting'])
+                return jsonify({'response': 'success', 'data': body}), 200
+            except Exception as e:
+                return jsonify({'error': e}), 500
+        else:
+            return '500'
     
 
 if __name__ == "__main__":
